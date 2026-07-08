@@ -67,7 +67,7 @@ function getTitle(doc: Cheatsheet) {
 }
 
 useSeoMeta({
-  title: () => activeDoc.value ? `${getTitle(activeDoc.value)} - Cheatsheet Shelf` : 'Cheatsheet Shelf',
+  title: () => activeDoc.value ? `${getTitle(activeDoc.value)} - Cheatsheeter` : 'Cheatsheeter',
   description: 'Browse local Markdown cheatsheets from the content folder.'
 })
 </script>
@@ -78,7 +78,7 @@ useSeoMeta({
       <div class="brand">
         <div class="brand-mark" aria-hidden="true">#</div>
         <div>
-          <h1>Cheatsheet Shelf</h1>
+          <h1>Cheatsheeter</h1>
           <p>{{ docs.length }} markdown {{ docs.length === 1 ? 'file' : 'files' }}</p>
         </div>
       </div>

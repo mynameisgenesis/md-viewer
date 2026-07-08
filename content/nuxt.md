@@ -17,7 +17,7 @@ description: Common Nuxt commands and project files.
 
 - `nuxt.config.ts` controls modules, app metadata, and build settings.
 - `content.config.ts` defines Markdown collections for Nuxt Content.
-- `pages/index.vue` renders the cheatsheet shelf.
+- `pages/index.vue` renders the cheatsheeter.
 
 ## Content Query
 
