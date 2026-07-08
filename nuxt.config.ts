@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   app: {
     head: {
-      title: 'Cheatsheet Shelf',
+      title: 'Cheatsheeter',
       meta: [
         {
           name: 'description',
