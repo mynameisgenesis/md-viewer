@@ -11,6 +11,7 @@ const { data: cheatsheets } = await useAsyncData('cheatsheets', () =>
 
 const search = ref('')
 const activePath = ref('')
+provide('activeCheatsheetPath', activePath)
 
 const docs = computed(() => cheatsheets.value ?? [])
 
