@@ -6,8 +6,9 @@ description: Key topics to understanded related to sports.
 # Sports Cheat Sheet
 
 ## Example of a Sports Fixture
+A fixture is an internal representation of a sporting event (such as a match or tournament) arranged to take place between teams or athletes at a specific date, time, and venue.
 
-In sports, a fixture is an officially scheduled match, game, or event arranged to take place between teams or athletes at a specific date, time, and venue.
+It is sport-agnostic and uniquely identified by a combination of five properties: Category (sport), Competition (league), Home Competitor, Away Competitor, and Start Time.
 
 A standard fixture for a football (soccer) match typically looks like this:
 ```
