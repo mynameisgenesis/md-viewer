@@ -3,8 +3,6 @@ title: Java Spring Boot Annotations
 description: Common Spring Boot and Spring Framework annotations for building Java services.
 ---
 
-# Java Spring Boot Annotations
-
 ## Mental Model
 
 Annotations are like sticky notes on your code. Spring scans those notes, then decides what objects to create, how to wire them together, and which methods should answer HTTP requests.
