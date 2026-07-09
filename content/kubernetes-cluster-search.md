@@ -29,11 +29,11 @@ kubectl api-resources --verbs=list --namespaced=true
 
 | Goal | Command |
 | --- | --- |
-| Find resources by name | `kubectl get all -A | grep -i 'checkout'` |
-| Find pods by broad text | `kubectl get pods -A -o wide | grep -i 'imagepull'` |
+| Find resources by name | `kubectl get all -A \| grep -i 'checkout'` |
+| Find pods by broad text | `kubectl get pods -A -o wide \| grep -i 'imagepull'` |
 | Find non-running pods | `kubectl get pods -A --field-selector=status.phase!=Running` |
 | Find pods on a node | `kubectl get pods -A --field-selector spec.nodeName=worker-1` |
-| Find services by exposed port | `kubectl get svc -A | grep ':443'` |
+| Find services by exposed port | `kubectl get svc -A \| grep ':443'` |
 | Find all ingress hosts | `kubectl get ingress -A` |
 
 ```bash
