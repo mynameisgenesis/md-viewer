@@ -7,11 +7,11 @@ description: Legend of Kubernetes aliases
 
 ## Pods
 
-**`podz <keyword>`** — Find pods by name
+**`pods <keyword>`** — Find pods by name
 | NAMESPACE | NAME | READY | STATUS | RESTARTS | AGE |
 |-----------|------|-------|--------|----------|-----|
 
-**`podzw <keyword>`** — Pods with node/IP info (wide output)
+**`podsw <keyword>`** — Pods with node/IP info (wide output)
 | NAMESPACE | NAME | READY | STATUS | RESTARTS | AGE | IP | NODE | NOMINATED NODE | READINESS GATES |
 |-----------|------|-------|--------|----------|-----|----|------|----------------|-----------------|
 
@@ -35,11 +35,11 @@ description: Legend of Kubernetes aliases
 
 ## Containers & Images
 
-**`imgz <keyword>`** — Find container images/versions
+**`imgs <keyword>`** — Find container images/versions
 | NAMESPACE | POD NAME | IMAGE |
 |-----------|----------|-------|
 
-**`contz <keyword>`** — Find container names within pods
+**`conts <keyword>`** — Find container names within pods
 | NAMESPACE | POD NAME | CONTAINER NAMES |
 |-----------|----------|-----------------|
 
@@ -47,15 +47,15 @@ description: Legend of Kubernetes aliases
 
 ## Services
 
-**`svcz <keyword>`** — Find services
+**`svcs <keyword>`** — Find services
 | NAMESPACE | NAME | TYPE | CLUSTER-IP | EXTERNAL-IP | PORT(S) | AGE |
 |-----------|------|------|------------|-------------|---------|-----|
 
-**`svcwz <keyword>`** — Services wide output
+**`svcsw <keyword>`** — Services wide output
 | NAMESPACE | NAME | TYPE | CLUSTER-IP | EXTERNAL-IP | PORT(S) | AGE | SELECTOR |
 |-----------|------|------|------------|-------------|---------|-----|----------|
 
-**`epsz <keyword>`** — Find endpoints
+**`epss <keyword>`** — Find endpoints
 | NAMESPACE | NAME | ENDPOINTS | AGE |
 |-----------|------|-----------|-----|
 
@@ -63,19 +63,19 @@ description: Legend of Kubernetes aliases
 
 ## Deployments & Workloads
 
-**`depz <keyword>`** — Find deployments
+**`deps <keyword>`** — Find deployments
 | NAMESPACE | NAME | READY | UP-TO-DATE | AVAILABLE | AGE |
 |-----------|------|-------|------------|-----------|-----|
 
-**`depwz <keyword>`** — Deployments wide output
+**`depsw <keyword>`** — Deployments wide output
 | NAMESPACE | NAME | READY | UP-TO-DATE | AVAILABLE | AGE | CONTAINERS | IMAGES | SELECTOR |
 |-----------|------|-------|------------|-----------|-----|------------|--------|----------|
 
-**`ssz <keyword>`** — Find statefulsets
+**`sss <keyword>`** — Find statefulsets
 | NAMESPACE | NAME | READY | AGE |
 |-----------|------|-------|-----|
 
-**`dsz <keyword>`** — Find daemonsets
+**`dss <keyword>`** — Find daemonsets
 | NAMESPACE | NAME | DESIRED | CURRENT | READY | UP-TO-DATE | AVAILABLE | NODE SELECTOR | AGE |
 |-----------|------|---------|---------|-------|------------|-----------|---------------|-----|
 
@@ -83,11 +83,11 @@ description: Legend of Kubernetes aliases
 
 ## Config
 
-**`cmz <keyword>`** — Find configmaps
+**`cms <keyword>`** — Find configmaps
 | NAMESPACE | NAME | DATA | AGE |
 |-----------|------|------|-----|
 
-**`secz <keyword>`** — Find secrets
+**`secs <keyword>`** — Find secrets
 | NAMESPACE | NAME | TYPE | DATA | AGE |
 |-----------|------|------|------|-----|
 
@@ -95,11 +95,11 @@ description: Legend of Kubernetes aliases
 
 ## Jobs
 
-**`jobz <keyword>`** — Find jobs
+**`jobs <keyword>`** — Find jobs
 | NAMESPACE | NAME | COMPLETIONS | DURATION | AGE |
 |-----------|------|-------------|----------|-----|
 
-**`cronz <keyword>`** — Find cronjobs
+**`crons <keyword>`** — Find cronjobs
 | NAMESPACE | NAME | SCHEDULE | SUSPEND | ACTIVE | LAST SCHEDULE | AGE |
 |-----------|------|----------|---------|--------|---------------|-----|
 
@@ -107,11 +107,11 @@ description: Legend of Kubernetes aliases
 
 ## Networking
 
-**`ingz <keyword>`** — Find ingress
+**`ings <keyword>`** — Find ingress
 | NAMESPACE | NAME | CLASS | HOSTS | ADDRESS | PORTS | AGE |
 |-----------|------|-------|-------|---------|-------|-----|
 
-**`netz <keyword>`** — Find network policies
+**`nets <keyword>`** — Find network policies
 | NAMESPACE | NAME | POD-SELECTOR | AGE |
 |-----------|------|--------------|-----|
 
@@ -119,7 +119,7 @@ description: Legend of Kubernetes aliases
 
 ## Nodes
 
-**`nodez <keyword>`** — Find nodes
+**`nodes <keyword>`** — Find nodes
 | NAME | STATUS | ROLES | AGE | VERSION | INTERNAL-IP | EXTERNAL-IP | OS-IMAGE | KERNEL-VERSION | CONTAINER-RUNTIME |
 |------|--------|-------|-----|---------|-------------|-------------|----------|----------------|-------------------|
 
@@ -127,7 +127,7 @@ description: Legend of Kubernetes aliases
 
 ## Events
 
-**`evtz <keyword>`** — Find events (sorted by time)
+**`evts <keyword>`** — Find events (sorted by time)
 | NAMESPACE | LAST SEEN | TYPE | REASON | OBJECT | MESSAGE |
 |-----------|-----------|------|--------|--------|---------|
 
@@ -135,11 +135,11 @@ description: Legend of Kubernetes aliases
 
 ## Namespaces & CRDs
 
-**`nsz <keyword>`** — Find namespaces
+**`nss <keyword>`** — Find namespaces
 | NAME | STATUS | AGE |
 |------|--------|-----|
 
-**`crdz <keyword>`** — Find CRDs
+**`crds <keyword>`** — Find CRDs
 | NAME | CREATED AT |
 |------|------------|
 
@@ -161,15 +161,15 @@ description: Legend of Kubernetes aliases
 
 | Alias | Usage | Description |
 |-------|-------|-------------|
-| `logz` | `logz <ns> <pod>` | View pod logs |
-| `logzf` | `logzf <ns> <pod>` | Tail/follow pod logs |
+| `logs` | `logs <ns> <pod>` | View pod logs |
+| `logsf` | `logsf <ns> <pod>` | Tail/follow pod logs |
 | `descpod` | `descpod <ns> <pod>` | Describe a pod |
 | `descsvc` | `descsvc <ns> <svc>` | Describe a service |
 | `descdep` | `descdep <ns> <deploy>` | Describe a deployment |
-| `execz` | `execz <ns> <pod> -- sh` | Shell into a pod |
+| `execs` | `execs <ns> <pod> -- sh` | Shell into a pod |
 | `kctx` | `kctx` | Show current context |
 | `kctxs` | `kctxs` | List all contexts |
 | `kns` | `kns <namespace>` | Switch default namespace |
-| `rollz` | `rollz <ns> deployment/<name>` | Rollout status |
-| `rollhz` | `rollhz <ns> deployment/<name>` | Rollout history |
-| `rollrz` | `rollrz <ns> deployment/<name>` | Restart deployment |
+| `rolls` | `rollz <ns> deployment/<name>` | Rollout status |
+| `rollsh` | `rollhz <ns> deployment/<name>` | Rollout history |
+| `rollsr` | `rollrz <ns> deployment/<name>` | Restart deployment |
