@@ -29,8 +29,6 @@ description: Soccor rules and references
 - If still tied: penalty shootout (5 kicks each, then sudden death)
 - **Important**: Regular season/league matches can end in a draw
 
----
-
 ## Competition Formats
 
 ### League (Round-Robin)
@@ -45,8 +43,6 @@ description: Soccor rules and references
 ### Group + Knockout
 - Group stage (round-robin in small groups) → knockout rounds
 - Examples: World Cup, Champions League, Euro Championship
-
----
 
 ## Common Betting Markets
 
@@ -85,8 +81,6 @@ description: Soccor rules and references
 ### Live / In-Play
 - Markets offered during the match with odds updating in real time
 
----
-
 ## Key Concepts for Betting Context
 
 ### Settlement Rules
@@ -114,8 +108,6 @@ description: Soccor rules and references
 - Drastically change match dynamics — a team down to 10 players is statistically much less likely to win
 - Important for live betting adjustments
 
----
-
 ## Major Competitions
 
 | Competition | Type | Teams | Schedule |
@@ -128,8 +120,6 @@ description: Soccor rules and references
 | Champions League | Group + Knockout | 32 | Sep–Jun |
 | World Cup | Group + Knockout | 32 | Every 4 years |
 | Euro Championship | Group + Knockout | 24 | Every 4 years |
-
----
 
 ## Terminology Quick Reference
 
