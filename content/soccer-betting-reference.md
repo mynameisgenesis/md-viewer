@@ -1,3 +1,8 @@
+---
+title: Internal Definitions
+description: A dictionary for internal jargan
+---
+
 # Soccer (Football) — Rules & Sports Betting Reference
 
 ## Basic Rules
