@@ -1,86 +1,92 @@
 <script setup lang="ts">
-import type { Ref } from 'vue'
+import type { Ref } from "vue";
 
-const activeCheatsheetPath = inject<Ref<string>>('activeCheatsheetPath')
-const codeRef = ref<HTMLElement | null>(null)
-const copyState = ref<'idle' | 'copied' | 'failed'>('idle')
-let resetTimer: ReturnType<typeof setTimeout> | undefined
+const activeCheatsheetPath = inject<Ref<string>>("activeCheatsheetPath");
+const codeRef = ref<HTMLElement | null>(null);
+const copyState = ref<"idle" | "copied" | "failed">("idle");
+let resetTimer: ReturnType<typeof setTimeout> | undefined;
 
 const canCopyInlineCode = computed(() => {
-  const path = activeCheatsheetPath?.value ?? ''
+  const path = activeCheatsheetPath?.value ?? "";
 
-  return path === '/git' || path === '/kubernetes-cluster-search'
-})
+  const filesWithInlineCopy = [
+    "/git",
+    "/kubernetes-cluster-search",
+    "/protobuf-commands",
+  ];
+
+  return filesWithInlineCopy.includes(path);
+});
 
 const copyLabel = computed(() => {
-  if (copyState.value === 'copied') {
-    return 'Copied'
+  if (copyState.value === "copied") {
+    return "Copied";
   }
 
-  if (copyState.value === 'failed') {
-    return 'Copy failed'
+  if (copyState.value === "failed") {
+    return "Copy failed";
   }
 
-  return 'Copy snippet'
-})
+  return "Copy snippet";
+});
 
 async function copyInlineCode() {
-  const text = codeRef.value?.innerText.trim()
+  const text = codeRef.value?.innerText.trim();
 
   if (!text) {
-    return
+    return;
   }
 
   try {
     if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(text)
+      await navigator.clipboard.writeText(text);
     } else {
-      copyWithTextarea(text)
+      copyWithTextarea(text);
     }
 
-    copyState.value = 'copied'
+    copyState.value = "copied";
   } catch {
     try {
-      copyWithTextarea(text)
-      copyState.value = 'copied'
+      copyWithTextarea(text);
+      copyState.value = "copied";
     } catch {
-      copyState.value = 'failed'
+      copyState.value = "failed";
     }
   }
 
   if (resetTimer) {
-    clearTimeout(resetTimer)
+    clearTimeout(resetTimer);
   }
 
   resetTimer = setTimeout(() => {
-    copyState.value = 'idle'
-  }, 1400)
+    copyState.value = "idle";
+  }, 1400);
 }
 
 function copyWithTextarea(text: string) {
-  const textarea = document.createElement('textarea')
-  textarea.value = text
-  textarea.setAttribute('readonly', '')
-  textarea.style.position = 'fixed'
-  textarea.style.inset = '0 auto auto 0'
-  textarea.style.opacity = '0'
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.inset = "0 auto auto 0";
+  textarea.style.opacity = "0";
 
-  document.body.appendChild(textarea)
-  textarea.select()
+  document.body.appendChild(textarea);
+  textarea.select();
 
-  const copied = document.execCommand('copy')
-  textarea.remove()
+  const copied = document.execCommand("copy");
+  textarea.remove();
 
   if (!copied) {
-    throw new Error('Unable to copy snippet')
+    throw new Error("Unable to copy snippet");
   }
 }
 
 onBeforeUnmount(() => {
   if (resetTimer) {
-    clearTimeout(resetTimer)
+    clearTimeout(resetTimer);
   }
-})
+});
 </script>
 
 <template>

@@ -1,104 +1,109 @@
 <script setup lang="ts">
-import type { Ref } from 'vue'
+import type { Ref } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    code?: string
-    language?: string | null
-    filename?: string | null
-    highlights?: number[]
-    meta?: string | null
-    class?: string | null
+    code?: string;
+    language?: string | null;
+    filename?: string | null;
+    highlights?: number[];
+    meta?: string | null;
+    class?: string | null;
   }>(),
   {
-    code: '',
+    code: "",
     language: null,
     filename: null,
     highlights: () => [],
     meta: null,
-    class: null
-  }
-)
+    class: null,
+  },
+);
 
-const activeCheatsheetPath = inject<Ref<string>>('activeCheatsheetPath')
-const copyState = ref<'idle' | 'copied' | 'failed'>('idle')
-let resetTimer: ReturnType<typeof setTimeout> | undefined
+const activeCheatsheetPath = inject<Ref<string>>("activeCheatsheetPath");
+const copyState = ref<"idle" | "copied" | "failed">("idle");
+let resetTimer: ReturnType<typeof setTimeout> | undefined;
 
 const copyLabel = computed(() => {
-  if (copyState.value === 'copied') {
-    return 'Copied'
+  if (copyState.value === "copied") {
+    return "Copied";
   }
 
-  if (copyState.value === 'failed') {
-    return 'Copy failed'
+  if (copyState.value === "failed") {
+    return "Copy failed";
   }
 
-  return 'Copy code'
-})
+  return "Copy code";
+});
 
 const isCommandExample = computed(() => {
-  const path = activeCheatsheetPath?.value ?? ''
+  const path = activeCheatsheetPath?.value ?? "";
+  const filesWithInlineCopy = [
+    "/git",
+    "/kubernetes-cluster-search",
+    "/protobuf-commands",
+  ];
 
-  return path === '/git' || path === '/kubernetes-cluster-search'
-})
+  return filesWithInlineCopy.includes(path);
+});
 
 async function copyCode() {
-  const text = props.code.trimEnd()
+  const text = props.code.trimEnd();
 
   if (!text) {
-    return
+    return;
   }
 
   try {
     if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(text)
+      await navigator.clipboard.writeText(text);
     } else {
-      copyWithTextarea(text)
+      copyWithTextarea(text);
     }
 
-    copyState.value = 'copied'
+    copyState.value = "copied";
   } catch {
     try {
-      copyWithTextarea(text)
-      copyState.value = 'copied'
+      copyWithTextarea(text);
+      copyState.value = "copied";
     } catch {
-      copyState.value = 'failed'
+      copyState.value = "failed";
     }
   }
 
   if (resetTimer) {
-    clearTimeout(resetTimer)
+    clearTimeout(resetTimer);
   }
 
   resetTimer = setTimeout(() => {
-    copyState.value = 'idle'
-  }, 1600)
+    copyState.value = "idle";
+  }, 1600);
 }
 
 function copyWithTextarea(text: string) {
-  const textarea = document.createElement('textarea')
-  textarea.value = text
-  textarea.setAttribute('readonly', '')
-  textarea.style.position = 'fixed'
-  textarea.style.inset = '0 auto auto 0'
-  textarea.style.opacity = '0'
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.inset = "0 auto auto 0";
+  textarea.style.opacity = "0";
 
-  document.body.appendChild(textarea)
-  textarea.select()
+  document.body.appendChild(textarea);
+  textarea.select();
 
-  const copied = document.execCommand('copy')
-  textarea.remove()
+  const copied = document.execCommand("copy");
+  textarea.remove();
 
   if (!copied) {
-    throw new Error('Unable to copy code')
+    throw new Error("Unable to copy code");
   }
 }
 
 onBeforeUnmount(() => {
   if (resetTimer) {
-    clearTimeout(resetTimer)
+    clearTimeout(resetTimer);
   }
-})
+});
 </script>
 
 <template>
@@ -119,7 +124,7 @@ onBeforeUnmount(() => {
       <svg v-else viewBox="0 0 24 24" aria-hidden="true">
         <path d="m5 12 4 4L19 6" />
       </svg>
-      <span>{{ copyState === 'copied' ? 'Copied' : 'Copy' }}</span>
+      <span>{{ copyState === "copied" ? "Copied" : "Copy" }}</span>
     </button>
 
     <pre :class="props.class"><slot /></pre>
