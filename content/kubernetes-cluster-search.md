@@ -404,7 +404,13 @@ kubectl logs -n prod -l app=checkout --all-containers=true --since=1h \
 | Rollout history | `rollsh <namespace> deployment/<name>` |
 | Rollout restart | `rollsr <namespace> deployment/<name>` |
 
-## Env Var Search
+## Env Vars
+
+Change the value of an existing environment variable.
+
+```bash
+kubectl set env deployment/baseball-sim-market-mapper -n baseball-pricing-service QUARKUS_LOG_LEVEL=INFO
+```
 
 Find pods with an env var containing the given value.
 
