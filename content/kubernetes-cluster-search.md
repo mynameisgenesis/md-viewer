@@ -289,8 +289,8 @@ kubectl logs -n prod -l app=checkout --all-containers=true --since=1h \
 
 | Description | Command |
 |-------------|---------|
-| List pod images across all namespaces | `imgs` |
-| List container names across all namespaces | `contz` |
+| List pod images across all namespaces | `kubectl get pods --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namespace}{\"\\t\"}{.metadata.name}{\"\\t\"}{range .spec.containers[*]}{.image}{\"\\n\"}{end}{end}' \| grep` |
+| List container names across all namespaces | `kubectl get pods --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namespace}{\"\\t\"}{.metadata.name}{\"\\t\"}{range .spec.containers[*]}{.name}{\" \"}{end}{\"\\n\"}{end}' \| grep` |
 
 ## Services
 
