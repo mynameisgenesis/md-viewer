@@ -274,6 +274,152 @@ kubectl logs -n prod -l app=checkout --all-containers=true --since=1h \
   | grep -Ei 'error|timeout|exception'
 ```
 
+
+## Pods
+
+| Description | Command |
+|-------------|---------|
+| Search all pods | `kubectl get pods --all-namespaces \| grep` |
+| Pods sorted by start time | `kubectl get pods --all-namespaces --sort-by='.status.startTime' \| grep` |
+| Failed pods | `kubectl get pods --all-namespaces --field-selector=status.phase=Failed \| grep` |
+| Pending pods | `kubectl get pods --all-namespaces --field-selector=status.phase=Pending \| grep` |
+| Watch pods | `kubectl get pods --all-namespaces -w \| grep` |
+
+## Containers & Images
+
+| Description | Command |
+|-------------|---------|
+| List pod images across all namespaces | `imgs` |
+| List container names across all namespaces | `contz` |
+
+## Services
+
+| Description | Command |
+|-------------|---------|
+| Search services | `kubectl get svc --all-namespaces \| grep` |
+| Search endpoints | `kubectl get endpoints --all-namespaces \| grep` |
+
+## Deployments & StatefulSets
+
+| Description | Command |
+|-------------|---------|
+| Search deployments | `kubectl get deployments --all-namespaces \| grep` |
+| Search statefulsets | `kubectl get statefulsets --all-namespaces \| grep` |
+| Search daemonsets | `kubectl get daemonsets --all-namespaces \| grep` |
+
+## ConfigMaps & Secrets
+
+| Description | Command |
+|-------------|---------|
+| Search configmaps | `kubectl get configmaps --all-namespaces \| grep` |
+| Search secrets | `kubectl get secrets --all-namespaces \| grep` |
+
+## Jobs & CronJobs
+
+| Description | Command |
+|-------------|---------|
+| Search jobs | `kubectl get jobs --all-namespaces \| grep` |
+| Search cronjobs | `kubectl get cronjobs --all-namespaces \| grep` |
+
+## Ingress & Networking
+
+| Description | Command |
+|-------------|---------|
+| Search ingress | `kubectl get ingress --all-namespaces \| grep` |
+| Search network policies | `kubectl get networkpolicies --all-namespaces \| grep` |
+
+## Nodes
+
+| Description | Command |
+|-------------|---------|
+| Search nodes | `kubectl get nodes -o wide \| grep` |
+
+## Namespaces
+
+| Description | Command |
+|-------------|---------|
+| Search namespaces | `kubectl get namespaces \| grep` |
+
+## Events
+
+| Description | Command |
+|-------------|---------|
+| Search events (sorted) | `kubectl get events --all-namespaces --sort-by='.lastTimestamp' \| grep` |
+
+## CRDs
+
+| Description | Command |
+|-------------|---------|
+| Search CRDs | `kubectl get crds \| grep` |
+
+## Logs
+
+| Description | Usage |
+|-------------|-------|
+| View pod logs | `logs <namespace> <pod-name>` |
+| Follow/tail pod logs | `logsf <namespace> <pod-name>` |
+
+## Describe (Quick Inspect)
+
+| Description | Usage |
+|-------------|-------|
+| Describe a pod | `descpod <namespace> <pod-name>` |
+| Describe a service | `descsvc <namespace> <svc-name>` |
+| Describe a deployment | `descdep <namespace> <dep-name>` |
+
+## Exec Into Pod
+
+| Description | Usage |
+|-------------|-------|
+| Exec into a pod | `execs <namespace> <pod-name>` |
+
+## Wide Output Variants
+
+| Description | Command |
+|-------------|---------|
+| Pods (wide) | `kubectl get pods --all-namespaces -o wide \| grep` |
+| Services (wide) | `kubectl get svc --all-namespaces -o wide \| grep` |
+| Deployments (wide) | `kubectl get deployments --all-namespaces -o wide \| grep` |
+
+## Resource Usage
+
+| Description | Command |
+|-------------|---------|
+| Pod resource usage | `kubectl top pods --all-namespaces \| grep` |
+| Node resource usage | `kubectl top nodes` |
+
+## Quick Context/Namespace
+
+| Description | Command |
+|-------------|---------|
+| Show current context | `kubectl config current-context` |
+| List all contexts | `kubectl config get-contexts` |
+| Switch namespace | `kubectl config set-context --current --namespace <ns>` |
+
+## Rollout
+
+| Description | Usage |
+|-------------|-------|
+| Rollout status | `rolls <namespace> deployment/<name>` |
+| Rollout history | `rollsh <namespace> deployment/<name>` |
+| Rollout restart | `rollsr <namespace> deployment/<name>` |
+
+## Env Var Search
+
+Find pods with an env var containing the given value.
+
+```bash
+  kubectl get pods --all-namespaces -o json | jq -r --arg val "$1" \
+    '.items[] | {ns: .metadata.namespace, name: .metadata.name, envs: [.spec.containers[].env[]? | select(.value != null and (.value | contains($val)))]} | select(.envs | length > 0) | "\(.ns)\t\(.name)\t\(.envs[].name)=\(.envs[].value)"'
+```
+
+Find pods with an env var name containing the given key.
+
+```bash
+  kubectl get pods --all-namespaces -o json | jq -r --arg key "$1" \
+    '.items[] | {ns: .metadata.namespace, name: .metadata.name, envs: [.spec.containers[].env[]? | select(.name | test($key; "i"))]} | select(.envs | length > 0) | "\(.ns)\t\(.name)\t\(.envs[].name)=\(.envs[].value)"'
+```
+
 ## Edge Cases and Safety
 
 - `grep` sees text, not Kubernetes structure. Use `jq`, `yq`, JSONPath, labels, or field selectors when exact fields matter.
