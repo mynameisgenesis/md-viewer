@@ -1,4 +1,7 @@
-# American Football (NFL) — Rules & Sports Betting Reference
+---
+title: American Football (NFL) — Rules & Sports Betting Reference
+description: A reference for the rules for american football betting
+---
 
 ## Basic Rules
 
